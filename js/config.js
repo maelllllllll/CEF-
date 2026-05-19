@@ -47,7 +47,6 @@ const SITE_CONFIG = {
     { src: "assets/photos/IMG_0372.JPG", alt: "CEF$!" },
     { src: "assets/photos/IMG_0385.JPG", alt: "CEF$!" },
     { src: "assets/photos/IMG_0387.JPG", alt: "CEF$!" },
-    { src: "assets/photos/IMG_0390.JPG", alt: "CEF$!" },
     { src: "assets/photos/IMG_0400.JPG", alt: "CEF$!" },
     { src: "assets/photos/photo_a.jpg",  alt: "CEF$!" },
     { src: "assets/photos/photo_b.jpg",  alt: "CEF$!" },
