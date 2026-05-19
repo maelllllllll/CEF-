@@ -97,40 +97,54 @@
 
       <!-- LOCAL PLAYER -->
       <div class="player-wrapper reveal-up" id="local-player-section">
-        <div class="player-header">
-          <span class="player-label">LECTEUR</span>
-          <span class="player-now-playing" id="now-playing">Sélectionne un titre</span>
-        </div>
-        <div class="visualizer" id="visualizer">
-          <div class="viz-bars"></div>
-        </div>
-        <div class="player-controls">
-          <button class="ctrl-btn" id="prev-btn" aria-label="Précédent">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
-          </button>
-          <button class="ctrl-btn play-btn" id="play-btn" aria-label="Lecture">
-            <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-          </button>
-          <button class="ctrl-btn" id="next-btn" aria-label="Suivant">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14 5.14 2.14L8 14.14V9.86zM16 6h2v12h-2z"/></svg>
-          </button>
-          <div class="volume-control">
-            <svg viewBox="0 0 24 24" fill="currentColor" class="vol-icon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
-            <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" />
+
+        <!-- VINYL (gauche) -->
+        <div class="vinyl-side">
+          <div class="vinyl-disc" id="vinyl-disc">
+            <div class="vinyl-label">
+              <img src="assets/photos/ep-cover.png" alt="Training Camp" id="vinyl-cover-img" />
+            </div>
+            <div class="vinyl-hole"></div>
           </div>
+          <p class="vinyl-title" id="vinyl-track-name">Training Camp</p>
         </div>
-        <div class="progress-wrapper">
-          <span class="time-current" id="time-current">0:00</span>
-          <div class="progress-bar" id="progress-bar">
-            <div class="progress-fill" id="progress-fill"></div>
-            <div class="progress-thumb" id="progress-thumb"></div>
+
+        <!-- CONTROLS (droite) -->
+        <div class="player-right">
+          <div class="player-header">
+            <span class="player-label">LECTEUR</span>
+            <span class="player-now-playing" id="now-playing">Sélectionne un titre</span>
           </div>
-          <span class="time-total" id="time-total">0:00</span>
+          <div class="visualizer" id="visualizer">
+            <div class="viz-bars"></div>
+          </div>
+          <div class="player-controls">
+            <button class="ctrl-btn" id="prev-btn" aria-label="Précédent">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+            </button>
+            <button class="ctrl-btn play-btn" id="play-btn" aria-label="Lecture">
+              <svg id="play-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="pause-icon" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+            </button>
+            <button class="ctrl-btn" id="next-btn" aria-label="Suivant">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zm2-8.14 5.14 2.14L8 14.14V9.86zM16 6h2v12h-2z"/></svg>
+            </button>
+            <div class="volume-control">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="vol-icon"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+              <input type="range" id="volume" min="0" max="1" step="0.01" value="0.8" />
+            </div>
+          </div>
+          <div class="progress-wrapper">
+            <span class="time-current" id="time-current">0:00</span>
+            <div class="progress-bar" id="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+              <div class="progress-thumb" id="progress-thumb"></div>
+            </div>
+            <span class="time-total" id="time-total">0:00</span>
+          </div>
+          <div class="local-tracklist" id="local-tracklist"></div>
         </div>
-        <div class="local-tracklist" id="local-tracklist">
-          <p class="no-tracks">Place tes .mp3 dans <code>assets/audio/</code> et liste-les dans <code>js/config.js</code></p>
-        </div>
+
       </div>
 
     </div>

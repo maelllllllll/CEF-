@@ -230,6 +230,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //  10. LOCAL AUDIO PLAYER
   // --------------------------------------------------------
   const audio        = document.getElementById('audio-element');
+  const vinylDisc    = document.getElementById('vinyl-disc');
+  const vinylName    = document.getElementById('vinyl-track-name');
   const playBtn      = document.getElementById('play-btn');
   const playIcon     = document.getElementById('play-icon');
   const pauseIcon    = document.getElementById('pause-icon');
@@ -278,6 +280,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const t = tracks[idx];
     audio.src = t.src || t.file || '';
     nowPlaying.textContent = t.title;
+    if (vinylName) vinylName.textContent = t.title;
 
     // Highlight active track
     document.querySelectorAll('.local-track').forEach((row, i) => {
@@ -293,6 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
     isPlaying = state;
     playIcon.style.display  = state ? 'none' : 'block';
     pauseIcon.style.display = state ? 'block' : 'none';
+    vinylDisc.classList.toggle('spinning', state);
 
     const bars = document.querySelectorAll('.viz-bar');
     if (state) {
