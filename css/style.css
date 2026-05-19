@@ -197,7 +197,7 @@ code { font-family: var(--font-mono); font-size: 0.8em; color: var(--neon-cyan);
   content: '';
   position: absolute;
   inset: 0;
-  background: url('../assets/photos/IMG_0380.JPG') center/cover no-repeat;
+  background: url('../assets/photos/IMG_0385.JPG') center/cover no-repeat;
   opacity: 0.18;
   filter: saturate(1.4);
   z-index: -1;
