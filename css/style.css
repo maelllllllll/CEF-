@@ -5,17 +5,17 @@
 
 /* ---------- CUSTOM PROPERTIES ---------- */
 :root {
-  --bg:          #07070f;
-  --bg-card:     #0e0e1a;
-  --bg-card-2:   #13131f;
-  --neon-cyan:   #00f0ff;
-  --neon-purple: #a855f7;
-  --neon-yellow: #f0e000;
-  --text:        #e2e2f0;
-  --text-muted:  #6b6b8a;
-  --border:      rgba(0, 240, 255, 0.12);
-  --glow-cyan:   0 0 20px rgba(0, 240, 255, 0.4), 0 0 60px rgba(0, 240, 255, 0.15);
-  --glow-purple: 0 0 20px rgba(168, 85, 247, 0.4), 0 0 60px rgba(168, 85, 247, 0.15);
+  --bg:          #060608;
+  --bg-card:     #0d0d10;
+  --bg-card-2:   #111115;
+  --neon-cyan:   #ff2d78;
+  --neon-purple: #39ff14;
+  --neon-yellow: #00cfff;
+  --text:        #ede8f0;
+  --text-muted:  #7a6b80;
+  --border:      rgba(255, 45, 120, 0.15);
+  --glow-cyan:   0 0 20px rgba(255, 45, 120, 0.5), 0 0 60px rgba(255, 45, 120, 0.2);
+  --glow-purple: 0 0 20px rgba(57, 255, 20, 0.5), 0 0 60px rgba(57, 255, 20, 0.2);
   --font-display: 'Bebas Neue', sans-serif;
   --font-body:    'Space Grotesk', sans-serif;
   --font-mono:    'Space Mono', monospace;
@@ -193,6 +193,26 @@ code { font-family: var(--font-mono); font-size: 0.8em; color: var(--neon-cyan);
   overflow: hidden;
 }
 
+#hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('../assets/photos/IMG_0380.JPG') center/cover no-repeat;
+  opacity: 0.18;
+  filter: saturate(1.4);
+  z-index: -1;
+}
+
+#hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center bottom, rgba(255,45,120,0.12) 0%, transparent 70%),
+              radial-gradient(ellipse at top right, rgba(57,255,20,0.08) 0%, transparent 60%),
+              linear-gradient(to bottom, rgba(6,6,8,0.5) 0%, rgba(6,6,8,0.3) 50%, rgba(6,6,8,0.9) 100%);
+  z-index: -1;
+}
+
 .hero-content {
   text-align: center;
   padding: 0 24px;
@@ -236,13 +256,13 @@ code { font-family: var(--font-mono); font-size: 0.8em; color: var(--neon-cyan);
 }
 
 .hero-name::before {
-  color: var(--neon-cyan);
+  color: #ff2d78;
   animation: glitch-1 4s infinite;
   clip-path: polygon(0 30%, 100% 30%, 100% 50%, 0 50%);
 }
 
 .hero-name::after {
-  color: var(--neon-purple);
+  color: #39ff14;
   animation: glitch-2 4s infinite;
   clip-path: polygon(0 60%, 100% 60%, 100% 75%, 0 75%);
 }
@@ -492,6 +512,14 @@ code { font-family: var(--font-mono); font-size: 0.8em; color: var(--neon-cyan);
   letter-spacing: 0.05em;
   flex: 1;
   transition: color var(--transition);
+}
+
+.track-feat {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--neon-purple);
+  letter-spacing: 0.05em;
+  margin-left: 4px;
 }
 
 .track-duration {

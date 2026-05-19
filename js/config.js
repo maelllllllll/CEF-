@@ -8,22 +8,20 @@ const SITE_CONFIG = {
   artist: "CEF$!",
   ep: "TRAINING CAMP",
   taglines: [
-    "Un flow, un camp, une mission.",
-    "Brut. Intense. Sans filtre.",
+    "Proche de la mode, loin du bruit.",
     "Training Camp — EP 2025.",
+    "Brut. Intense. Sans filtre.",
   ],
 
   // ----------------------------------------------------------
   //  TRACKLIST EP
-  //  Ajoute/modifie les titres de l'EP
   // ----------------------------------------------------------
   tracklist: [
-    { number: "01", title: "TRAINING CAMP", duration: "2:54" },
-    { number: "02", title: "À MON SIGNAL",  duration: "3:12" },
-    { number: "03", title: "CARDIO",         duration: "2:41" },
-    { number: "04", title: "NO DAYS OFF",    duration: "3:05" },
-    { number: "05", title: "LAST REP",       duration: "3:30" },
-    // Ajoute tes vrais titres ici
+    { number: "01", title: "PROCHE DE LA MODE",  duration: "" },
+    { number: "02", title: "FUMÉE",               duration: "" },
+    { number: "03", title: "INTERLUDE",           duration: "" },
+    { number: "04", title: "ARRIVEDERCI",         duration: "", feat: "JEREMYJACK" },
+    { number: "05", title: "NEXT STEP",           duration: "" },
   ],
 
   // ----------------------------------------------------------
@@ -42,8 +40,17 @@ const SITE_CONFIG = {
   //  Ex: { src: "assets/photos/photo1.jpg", alt: "CEF$! en studio" }
   // ----------------------------------------------------------
   photos: [
-    // { src: "assets/photos/photo1.jpg", alt: "CEF$! — Studio" },
-    // { src: "assets/photos/photo2.jpg", alt: "CEF$! — Live" },
+    { src: "assets/photos/IMG_0366.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0368.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0376.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0380.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0372.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0385.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0387.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0390.JPG", alt: "CEF$!" },
+    { src: "assets/photos/IMG_0400.JPG", alt: "CEF$!" },
+    { src: "assets/photos/photo_a.jpg",  alt: "CEF$!" },
+    { src: "assets/photos/photo_b.jpg",  alt: "CEF$!" },
   ],
 
   // ----------------------------------------------------------

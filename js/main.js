@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       this.vx = (Math.random() - 0.5) * 0.15;
       this.size   = Math.random() * 1.5 + 0.3;
       this.opacity = Math.random() * 0.6 + 0.1;
-      this.color  = Math.random() > 0.5 ? '#00f0ff' : '#a855f7';
+      this.color  = Math.random() > 0.5 ? '#ff2d78' : '#39ff14';
     }
     update() {
       this.x += this.vx;
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
       div.className = 'track-item reveal-up';
       div.innerHTML = `
         <span class="track-num">${t.number}</span>
-        <span class="track-title">${t.title}</span>
+        <span class="track-title">${t.title}${t.feat ? `<span class="track-feat"> ft. ${t.feat}</span>` : ''}</span>
         <span class="track-duration">${t.duration}</span>
       `;
       tracklistEl.appendChild(div);
