@@ -31,7 +31,12 @@ const SITE_CONFIG = {
   //  Ex: { title: "Training Camp", file: "assets/audio/01-training-camp.mp3", cover: "assets/photos/ep-cover.jpg" }
   // ----------------------------------------------------------
   audioTracks: [
-    { title: "FUMÉE", file: "assets/audio/Fumee.mp3", cover: "assets/photos/ep-cover.png" },
+    { title: "PROCHE DE LA MODE",        file: "assets/audio/Proche-de-la-mode.mp3", cover: "assets/photos/ep-cover.png" },
+    { title: "FUMÉE",                    file: "assets/audio/Fumee.mp3",             cover: "assets/photos/ep-cover.png" },
+    { title: "INTERLUDE",                file: "assets/audio/Interlude.mp3",         cover: "assets/photos/ep-cover.png" },
+    { title: "ARRIVEDERCI ft. JEREMYJACK", file: "assets/audio/Arrivederci.mp3",    cover: "assets/photos/ep-cover.png" },
+    { title: "NEXT STEP",                file: "assets/audio/Next-step.mp3",         cover: "assets/photos/ep-cover.png" },
+    { title: "ADVERSITÉ ft. JEREMYJACK", file: "assets/audio/Adversite.mp3",        cover: "assets/photos/ep-cover.png" },
   ],
 
   // ----------------------------------------------------------
