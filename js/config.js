@@ -31,8 +31,7 @@ const SITE_CONFIG = {
   //  Ex: { title: "Training Camp", file: "assets/audio/01-training-camp.mp3", cover: "assets/photos/ep-cover.jpg" }
   // ----------------------------------------------------------
   audioTracks: [
-    // { title: "TRAINING CAMP", file: "assets/audio/01-training-camp.mp3", cover: "assets/photos/ep-cover.jpg" },
-    // { title: "À MON SIGNAL",  file: "assets/audio/02-a-mon-signal.mp3",  cover: "assets/photos/ep-cover.jpg" },
+    { title: "FUMÉE", file: "assets/audio/Fumee.mp3", cover: "assets/photos/ep-cover.png" },
   ],
 
   // ----------------------------------------------------------
