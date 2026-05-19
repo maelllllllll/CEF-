@@ -22,7 +22,7 @@ const SITE_CONFIG = {
     { number: "03", title: "INTERLUDE",           duration: "" },
     { number: "04", title: "ARRIVEDERCI",         duration: "", feat: "JEREMYJACK" },
     { number: "05", title: "NEXT STEP",           duration: "" },
-    { number: "06", title: "ADVERSITÉ",           duration: "", feat: "CEF$! X JEREMYJACK" },
+    { number: "06", title: "ADVERSITÉ",           duration: "", feat: "JEREMYJACK" },
   ],
 
   // ----------------------------------------------------------
