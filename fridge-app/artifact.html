@@ -1,0 +1,1457 @@
+<title>Mon Frigo — Recettes & Inventaire</title>
+<style>
+:root {
+  --bg: #f7f6f2;
+  --bg-elevated: #ffffff;
+  --bg-input: #f0efe9;
+  --border: #ddd9cf;
+  --border-subtle: #e8e5dc;
+  --text: #2a2a26;
+  --text-secondary: #6b6960;
+  --text-tertiary: #9b9688;
+  --accent: #4a7c5e;
+  --accent-hover: #3d6a4f;
+  --accent-subtle: rgba(74,124,94,0.08);
+  --accent-text: #ffffff;
+  --warning: #c8952e;
+  --warning-bg: rgba(200,149,46,0.08);
+  --warning-border: rgba(200,149,46,0.25);
+  --danger: #b5453a;
+  --danger-bg: rgba(181,69,58,0.06);
+  --danger-border: rgba(181,69,58,0.25);
+  --success: #3a8a5c;
+  --success-bg: rgba(58,138,92,0.08);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, Roboto, sans-serif;
+  --mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141412;
+    --bg-elevated: #1e1e1b;
+    --bg-input: #252520;
+    --border: #333028;
+    --border-subtle: #2a2824;
+    --text: #e5e2da;
+    --text-secondary: #9e9a8e;
+    --text-tertiary: #6e6b60;
+    --accent: #6ba37d;
+    --accent-hover: #7db48e;
+    --accent-subtle: rgba(107,163,125,0.10);
+    --accent-text: #141412;
+    --warning-bg: rgba(200,149,46,0.10);
+    --warning-border: rgba(200,149,46,0.20);
+    --danger-bg: rgba(181,69,58,0.10);
+    --danger-border: rgba(181,69,58,0.20);
+    --success-bg: rgba(58,138,92,0.10);
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.15);
+    --shadow-md: 0 2px 8px rgba(0,0,0,0.20);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.30);
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #141412;
+  --bg-elevated: #1e1e1b;
+  --bg-input: #252520;
+  --border: #333028;
+  --border-subtle: #2a2824;
+  --text: #e5e2da;
+  --text-secondary: #9e9a8e;
+  --text-tertiary: #6e6b60;
+  --accent: #6ba37d;
+  --accent-hover: #7db48e;
+  --accent-subtle: rgba(107,163,125,0.10);
+  --accent-text: #141412;
+  --warning-bg: rgba(200,149,46,0.10);
+  --warning-border: rgba(200,149,46,0.20);
+  --danger-bg: rgba(181,69,58,0.10);
+  --danger-border: rgba(181,69,58,0.20);
+  --success-bg: rgba(58,138,92,0.10);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.20);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.30);
+}
+:root[data-theme="light"] {
+  --bg: #f7f6f2;
+  --bg-elevated: #ffffff;
+  --bg-input: #f0efe9;
+  --border: #ddd9cf;
+  --border-subtle: #e8e5dc;
+  --text: #2a2a26;
+  --text-secondary: #6b6960;
+  --text-tertiary: #9b9688;
+  --accent: #4a7c5e;
+  --accent-hover: #3d6a4f;
+  --accent-subtle: rgba(74,124,94,0.08);
+  --accent-text: #ffffff;
+  --warning-bg: rgba(200,149,46,0.08);
+  --warning-border: rgba(200,149,46,0.25);
+  --danger-bg: rgba(181,69,58,0.06);
+  --danger-border: rgba(181,69,58,0.25);
+  --success-bg: rgba(58,138,92,0.08);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+/* ── HEADER ── */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px 0;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.app-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  background: var(--accent);
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  color: var(--accent-text);
+  font-size: 0.85rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.header-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.nav-tabs {
+  display: flex;
+  gap: 0;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  padding: 11px 16px;
+  background: none;
+  border: none;
+  color: var(--text-tertiary);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  letter-spacing: 0.02em;
+}
+
+.nav-tab:hover { color: var(--text-secondary); }
+.nav-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── MAIN ── */
+.main-content {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 20px 80px;
+}
+
+.tab-content {
+  display: none;
+  animation: tabIn 0.2s ease;
+}
+.tab-content.active { display: block; }
+
+@keyframes tabIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes tabIn { from { opacity: 1; } to { opacity: 1; } }
+}
+
+.tab-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.tab-title {
+  font-size: 1.35rem;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.tab-count {
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  margin-top: 2px;
+}
+
+/* ── ALERTS ── */
+.alert-zone { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+
+.alert {
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  margin-top: 16px;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+.alert-warning {
+  background: var(--warning-bg);
+  border: 1px solid var(--warning-border);
+}
+.alert-warning strong { color: var(--warning); }
+.alert ul {
+  margin: 6px 0 0 18px;
+  color: var(--text-secondary);
+}
+.alert li { margin: 2px 0; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, box-shadow 0.12s;
+  line-height: 1.3;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-primary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.btn-sm {
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-family: var(--font);
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.12s;
+  background: var(--accent-subtle);
+  color: var(--accent);
+}
+.btn-sm:hover { background: var(--accent); color: var(--accent-text); }
+.btn-sm.btn-danger {
+  background: transparent;
+  color: var(--text-tertiary);
+}
+.btn-sm.btn-danger:hover {
+  background: var(--danger-bg);
+  color: var(--danger);
+}
+
+.btn-icon {
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.12s;
+}
+.btn-icon:hover { background: var(--bg-input); color: var(--text); }
+.btn-icon:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+/* ── RECIPE CARDS ── */
+.recipe-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 18px 18px 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.recipe-card:hover {
+  border-left-color: var(--accent-hover);
+  box-shadow: var(--shadow-md);
+}
+
+.recipe-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.recipe-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.3;
+}
+
+.recipe-source {
+  font-size: 1rem;
+  text-decoration: none;
+  opacity: 0.5;
+  transition: opacity 0.12s;
+  flex-shrink: 0;
+}
+.recipe-source:hover { opacity: 1; }
+
+.recipe-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.tag {
+  padding: 2px 9px;
+  background: var(--accent-subtle);
+  color: var(--accent);
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.recipe-meta {
+  display: flex;
+  gap: 14px;
+  margin-top: 8px;
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+}
+
+.recipe-ingredients {
+  margin-top: 12px;
+  font-size: 0.87rem;
+}
+.recipe-ingredients strong {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  font-weight: 650;
+}
+.recipe-ingredients ul {
+  margin: 4px 0 0 18px;
+  color: var(--text-secondary);
+}
+.recipe-ingredients li {
+  margin: 1px 0;
+  line-height: 1.55;
+}
+
+.recipe-steps {
+  margin-top: 10px;
+  font-size: 0.87rem;
+  cursor: pointer;
+  user-select: none;
+}
+.recipe-steps strong {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+  font-weight: 650;
+}
+.recipe-steps.collapsed .steps-content { display: none; }
+.steps-content {
+  margin-top: 6px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+.recipe-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ── FRIDGE ── */
+.fridge-category { margin-bottom: 22px; }
+
+.category-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+.fridge-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: 4px;
+  transition: all 0.12s;
+  box-shadow: var(--shadow-sm);
+}
+
+.fridge-item.status-expired {
+  border-color: var(--danger-border);
+  background: var(--danger-bg);
+}
+.fridge-item.status-urgent {
+  border-color: var(--warning-border);
+  background: var(--warning-bg);
+}
+.fridge-item.status-warning {
+  border-color: var(--warning-border);
+}
+
+.item-info { flex: 1; min-width: 0; }
+.item-name { font-weight: 650; font-size: 0.92rem; }
+.item-qty {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+
+.item-expiry { text-align: right; flex-shrink: 0; }
+
+.expiry-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+.expiry-badge.status-ok { color: var(--success); background: var(--success-bg); }
+.expiry-badge.status-warning { color: var(--warning); background: var(--warning-bg); }
+.expiry-badge.status-urgent { color: var(--danger); background: rgba(181,69,58,0.12); }
+.expiry-badge.status-expired { color: #fff; background: var(--danger); }
+
+.expiry-date {
+  display: block;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.item-actions { display: flex; gap: 2px; flex-shrink: 0; }
+
+/* ── SHOPPING ── */
+.shopping-add {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.shopping-add input { flex: 1; }
+
+.shopping-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 12px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  margin-bottom: 3px;
+  transition: opacity 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+.shopping-item.checked { opacity: 0.45; }
+.shopping-item.checked .item-text { text-decoration: line-through; }
+
+.checkbox-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  min-width: 0;
+  font-size: 0.9rem;
+}
+
+.checkbox-label input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.item-text { min-width: 0; }
+
+.from-recipe {
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+.shopping-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+/* ── SUGGESTIONS ── */
+.season-banner {
+  background: var(--accent-subtle);
+  border: 1px solid rgba(74,124,94,0.15);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+
+.season-label {
+  font-size: 1.05rem;
+  font-weight: 750;
+  display: block;
+  margin-bottom: 4px;
+  letter-spacing: -0.2px;
+}
+
+.season-banner p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+}
+
+.suggestion-section {
+  margin-bottom: 22px;
+}
+.suggestion-section h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+.suggestion-section > p {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.chip-expiry {
+  padding: 5px 12px;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 650;
+}
+
+.chip-season {
+  padding: 7px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 20px;
+  font-size: 0.83rem;
+  transition: border-color 0.12s;
+}
+.chip-season:hover { border-color: var(--accent); }
+
+.suggestion-card {
+  padding: 12px 14px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  transition: all 0.12s;
+  box-shadow: var(--shadow-sm);
+}
+.suggestion-card:hover { box-shadow: var(--shadow-md); }
+.suggestion-card strong {
+  display: block;
+  font-size: 0.92rem;
+  margin-bottom: 2px;
+}
+.match-info {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+}
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 200;
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius) var(--radius) 0 0;
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  animation: slideUp 0.22s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@media (min-width: 640px) {
+  .modal-overlay { align-items: center; }
+  .modal {
+    border-radius: var(--radius);
+    max-height: 80vh;
+  }
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.modal-header h2 {
+  font-size: 1.1rem;
+  font-weight: 750;
+  letter-spacing: -0.3px;
+}
+
+/* ── FORMS ── */
+.form-group { margin-bottom: 14px; }
+
+.form-group label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+input[type="url"],
+textarea,
+select {
+  width: 100%;
+  padding: 9px 12px;
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-size: 0.88rem;
+  font-family: var(--font);
+  transition: border-color 0.12s, box-shadow 0.12s;
+  line-height: 1.4;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-subtle);
+}
+
+textarea { resize: vertical; min-height: 72px; }
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%236b6960' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 30px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.ingredient-row {
+  display: grid;
+  grid-template-columns: 72px 72px 1fr 30px;
+  gap: 6px;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ── SEARCH ── */
+.search-box { margin-bottom: 16px; }
+.search-box input {
+  padding-left: 12px;
+}
+
+/* ── EMPTY ── */
+.empty-state {
+  text-align: center;
+  padding: 44px 20px;
+  color: var(--text-tertiary);
+}
+.empty-icon { font-size: 2.4rem; margin-bottom: 10px; opacity: 0.7; }
+.empty-state h3 {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.empty-state p { font-size: 0.85rem; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--text);
+  color: var(--bg);
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 650;
+  font-size: 0.85rem;
+  z-index: 300;
+  opacity: 0;
+  transition: all 0.25s ease;
+  box-shadow: var(--shadow-lg);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .header-top { padding: 10px 14px 0; }
+  .nav-tabs { padding: 0 8px; }
+  .nav-tab { padding: 10px 12px; font-size: 0.78rem; }
+  .main-content { padding: 16px 14px 80px; }
+  .ingredient-row { grid-template-columns: 1fr 1fr 1fr 30px; }
+  .recipe-meta { flex-wrap: wrap; gap: 6px; }
+  .form-row { grid-template-columns: 1fr; }
+  .fridge-item { flex-wrap: wrap; }
+}
+</style>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-top">
+    <div class="app-logo">
+      <div class="logo-mark">F</div>
+      <span>Mon Frigo</span>
+    </div>
+    <div class="header-actions">
+      <button class="btn btn-ghost" id="btn-export">Export</button>
+      <button class="btn btn-ghost" id="btn-import">Import</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" />
+    </div>
+  </div>
+  <nav class="nav-tabs">
+    <button class="nav-tab active" data-tab="recipes">Recettes</button>
+    <button class="nav-tab" data-tab="fridge">Frigo</button>
+    <button class="nav-tab" data-tab="shopping">Courses</button>
+    <button class="nav-tab" data-tab="suggestions">Suggestions</button>
+  </nav>
+</header>
+
+<div class="alert-zone" id="expiry-alerts"></div>
+
+<div class="main-content">
+  <!-- RECIPES -->
+  <div class="tab-content active" id="tab-recipes">
+    <div class="tab-header">
+      <div>
+        <h1 class="tab-title">Mes Recettes</h1>
+        <span class="tab-count" id="recipes-count">0 recettes</span>
+      </div>
+      <button class="btn btn-primary" onclick="app.showAddRecipeModal()">Ajouter</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="recipe-search" placeholder="Rechercher une recette, un ingredient..." />
+    </div>
+    <div id="recipes-list"></div>
+  </div>
+
+  <!-- FRIDGE -->
+  <div class="tab-content" id="tab-fridge">
+    <div class="tab-header">
+      <div>
+        <h1 class="tab-title">Mon Frigo</h1>
+        <span class="tab-count" id="fridge-count">0 articles</span>
+      </div>
+      <button class="btn btn-primary" onclick="app.showAddFridgeModal()">Ajouter</button>
+    </div>
+    <div id="fridge-list"></div>
+  </div>
+
+  <!-- SHOPPING -->
+  <div class="tab-content" id="tab-shopping">
+    <div class="tab-header">
+      <div>
+        <h1 class="tab-title">Liste de Courses</h1>
+        <span class="tab-count" id="shopping-count">0 articles</span>
+      </div>
+    </div>
+    <div class="shopping-add">
+      <input type="text" id="shopping-input" placeholder="Ajouter un article..." />
+      <button class="btn btn-primary" onclick="app.addShoppingItem()">+</button>
+    </div>
+    <div id="shopping-list"></div>
+    <div class="shopping-actions">
+      <button class="btn btn-ghost" onclick="app.clearCheckedShopping()">Supprimer coches</button>
+      <button class="btn btn-primary" onclick="app.moveCheckedToFridge()">Envoyer au frigo</button>
+    </div>
+  </div>
+
+  <!-- SUGGESTIONS -->
+  <div class="tab-content" id="tab-suggestions">
+    <div class="tab-header">
+      <div>
+        <h1 class="tab-title">Suggestions</h1>
+        <span class="tab-count">Selon ton frigo et la saison</span>
+      </div>
+    </div>
+    <div id="suggestions-content"></div>
+  </div>
+</div>
+
+<!-- MODAL: ADD RECIPE -->
+<div class="modal-overlay" id="modal-add-recipe">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Nouvelle Recette</h2>
+      <button class="btn-icon" onclick="app.closeModal('modal-add-recipe')">&#10005;</button>
+    </div>
+    <form id="recipe-form" onsubmit="event.preventDefault(); app.saveRecipe();">
+      <div class="form-group">
+        <label for="r-name">Nom de la recette</label>
+        <input type="text" id="r-name" required placeholder="Ex: Pates carbonara" />
+      </div>
+      <div class="form-group">
+        <label for="r-source">Lien Instagram</label>
+        <input type="url" id="r-source" placeholder="https://www.instagram.com/p/..." />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="r-tags">Tags</label>
+          <input type="text" id="r-tags" placeholder="Plat, Italien, Rapide" />
+        </div>
+        <div class="form-group">
+          <label for="r-servings">Personnes</label>
+          <input type="number" id="r-servings" min="1" max="20" placeholder="4" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="r-preptime">Temps de preparation (min)</label>
+        <input type="number" id="r-preptime" min="1" placeholder="30" />
+      </div>
+      <div class="form-group">
+        <label>Ingredients</label>
+        <div id="ingredients-list"></div>
+        <button type="button" class="btn btn-ghost" onclick="app.addIngredientRow()" style="margin-top:6px;font-size:0.82rem">+ Ingredient</button>
+      </div>
+      <div class="form-group">
+        <label for="r-steps">Preparation</label>
+        <textarea id="r-steps" rows="4" placeholder="Decris les etapes..."></textarea>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="app.closeModal('modal-add-recipe')">Annuler</button>
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- MODAL: ADD FRIDGE ITEM -->
+<div class="modal-overlay" id="modal-add-fridge">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>Ajouter au Frigo</h2>
+      <button class="btn-icon" onclick="app.closeModal('modal-add-fridge')">&#10005;</button>
+    </div>
+    <form id="fridge-form" onsubmit="event.preventDefault(); app.saveFridgeItem();">
+      <div class="form-group">
+        <label for="f-name">Article</label>
+        <input type="text" id="f-name" required placeholder="Ex: Poulet" />
+      </div>
+      <div class="form-group">
+        <label for="f-category">Categorie</label>
+        <select id="f-category"></select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-quantity">Quantite</label>
+          <input type="text" id="f-quantity" placeholder="500" />
+        </div>
+        <div class="form-group">
+          <label for="f-unit">Unite</label>
+          <input type="text" id="f-unit" placeholder="g, L, pieces..." />
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="f-purchased">Date d'achat</label>
+          <input type="date" id="f-purchased" />
+        </div>
+        <div class="form-group">
+          <label for="f-expires">Peremption</label>
+          <input type="date" id="f-expires" />
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-ghost" onclick="app.closeModal('modal-add-fridge')">Annuler</button>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+const DataStore = {
+  KEYS: { recipes: 'fridgeApp_recipes', fridge: 'fridgeApp_fridge', shopping: 'fridgeApp_shopping' },
+  load(key) {
+    try { const d = localStorage.getItem(this.KEYS[key]); return d ? JSON.parse(d) : []; }
+    catch { return []; }
+  },
+  save(key, data) { localStorage.setItem(this.KEYS[key], JSON.stringify(data)); },
+  exportAll() {
+    return { recipes: this.load('recipes'), fridge: this.load('fridge'), shopping: this.load('shopping'), exportedAt: new Date().toISOString() };
+  },
+  importAll(data) {
+    if (data.recipes) this.save('recipes', data.recipes);
+    if (data.fridge) this.save('fridge', data.fridge);
+    if (data.shopping) this.save('shopping', data.shopping);
+  },
+  id() { return Date.now().toString(36) + Math.random().toString(36).substr(2, 5); }
+};
+
+const CATS = [
+  { id: 'viande', label: 'Viande & Poisson', defaultDays: 2 },
+  { id: 'produits-laitiers', label: 'Produits laitiers', defaultDays: 7 },
+  { id: 'fruits-legumes', label: 'Fruits & Legumes', defaultDays: 5 },
+  { id: 'boissons', label: 'Boissons', defaultDays: 30 },
+  { id: 'condiments', label: 'Condiments & Sauces', defaultDays: 90 },
+  { id: 'cereales', label: 'Cereales & Feculents', defaultDays: 180 },
+  { id: 'surgeles', label: 'Surgeles', defaultDays: 90 },
+  { id: 'autre', label: 'Autre', defaultDays: 14 }
+];
+
+const SEASONS = {
+  get() {
+    const m = new Date().getMonth();
+    if (m >= 2 && m <= 4) return 'printemps';
+    if (m >= 5 && m <= 7) return 'ete';
+    if (m >= 8 && m <= 10) return 'automne';
+    return 'hiver';
+  },
+  label() {
+    return { printemps: 'Printemps', ete: 'Ete', automne: 'Automne', hiver: 'Hiver' }[this.get()];
+  },
+  ingredients() {
+    return {
+      printemps: ['asperges', 'petits pois', 'radis', 'fraises', 'artichauts', 'epinards', 'feves'],
+      ete: ['tomates', 'courgettes', 'aubergines', 'poivrons', 'peches', 'abricots', 'melons', 'pasteque'],
+      automne: ['champignons', 'courge', 'potiron', 'chataignes', 'pommes', 'poires', 'raisin', 'noix'],
+      hiver: ['poireaux', 'choux', 'endives', 'navets', 'clementines', 'oranges', 'topinambours', 'panais']
+    }[this.get()] || [];
+  },
+  ideas() {
+    return {
+      printemps: ['Risotto aux asperges', 'Salade de fraises', 'Quiche aux epinards', 'Tarte aux petits pois'],
+      ete: ['Ratatouille', 'Gaspacho', 'Salade nicoise', 'Tarte aux tomates', 'Sorbet peche'],
+      automne: ['Veloute de potiron', 'Risotto aux champignons', 'Tarte aux pommes', 'Gratin de courge'],
+      hiver: ['Pot-au-feu', 'Gratin dauphinois', 'Soupe de poireaux', 'Blanquette de veau', 'Fondant au chocolat']
+    }[this.get()] || [];
+  }
+};
+
+class FridgeApp {
+  constructor() { this.currentTab = 'recipes'; }
+
+  init() {
+    this.bindNav();
+    this.bindGlobal();
+    this.renderAll();
+    this.checkExpirations();
+    this.showTab('recipes');
+  }
+
+  bindNav() {
+    document.querySelectorAll('.nav-tab').forEach(t => t.addEventListener('click', () => this.showTab(t.dataset.tab)));
+  }
+
+  showTab(id) {
+    this.currentTab = id;
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.toggle('active', c.id === 'tab-' + id));
+    this['render' + id[0].toUpperCase() + id.slice(1)]?.();
+  }
+
+  renderAll() { this.renderRecipes(); this.renderFridge(); this.renderShopping(); this.renderSuggestions(); }
+
+  esc(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  toast(msg) {
+    document.querySelector('.toast')?.remove();
+    const t = document.createElement('div');
+    t.className = 'toast'; t.textContent = msg;
+    document.body.appendChild(t);
+    requestAnimationFrame(() => t.classList.add('show'));
+    setTimeout(() => { t.classList.remove('show'); setTimeout(() => t.remove(), 250); }, 2200);
+  }
+
+  closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+  // ── RECIPES ──
+  renderRecipes() {
+    const recipes = DataStore.load('recipes');
+    const el = document.getElementById('recipes-list');
+    document.getElementById('recipes-count').textContent = recipes.length + ' recette' + (recipes.length !== 1 ? 's' : '');
+
+    if (!recipes.length) {
+      el.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128214;</div><h3>Aucune recette</h3><p>Ajoute ta premiere recette depuis Instagram ou manuellement.</p></div>';
+      return;
+    }
+
+    const q = (document.getElementById('recipe-search')?.value || '').toLowerCase();
+    const filtered = recipes.filter(r => !q || r.name.toLowerCase().includes(q) || r.ingredients?.some(i => i.name.toLowerCase().includes(q)) || r.tags?.some(t => t.toLowerCase().includes(q)));
+
+    el.innerHTML = filtered.map(r => `
+      <div class="recipe-card">
+        <div class="recipe-header">
+          <h3 class="recipe-name">${this.esc(r.name)}</h3>
+          ${r.source ? `<a href="${this.esc(r.source)}" target="_blank" rel="noopener" class="recipe-source" title="Voir sur Instagram">&#128247;</a>` : ''}
+        </div>
+        ${r.tags?.length ? '<div class="recipe-tags">' + r.tags.map(t => '<span class="tag">' + this.esc(t) + '</span>').join('') + '</div>' : ''}
+        <div class="recipe-meta">
+          ${r.servings ? '<span>' + r.servings + ' pers.</span>' : ''}
+          ${r.prepTime ? '<span>' + r.prepTime + ' min</span>' : ''}
+          ${r.addedAt ? '<span>' + new Date(r.addedAt).toLocaleDateString('fr-FR') + '</span>' : ''}
+        </div>
+        ${r.ingredients?.length ? '<div class="recipe-ingredients"><strong>Ingredients</strong><ul>' + r.ingredients.map(i => '<li>' + this.esc(i.quantity || '') + ' ' + this.esc(i.unit || '') + ' ' + this.esc(i.name) + '</li>').join('') + '</ul></div>' : ''}
+        ${r.steps ? '<div class="recipe-steps collapsed" onclick="this.classList.toggle(\'collapsed\')"><strong>Preparation &#9662;</strong><div class="steps-content">' + this.esc(r.steps).replace(/\n/g, '<br>') + '</div></div>' : ''}
+        <div class="recipe-actions">
+          <button class="btn-sm" onclick="app.addRecipeToShopping('${r.id}')">Ajouter aux courses</button>
+          <button class="btn-sm btn-danger" onclick="app.deleteRecipe('${r.id}')">Supprimer</button>
+        </div>
+      </div>`).join('');
+  }
+
+  showAddRecipeModal() {
+    document.getElementById('modal-add-recipe').classList.add('open');
+    document.getElementById('recipe-form').reset();
+    document.getElementById('ingredients-list').innerHTML = '';
+    this.addIngredientRow();
+  }
+
+  addIngredientRow() {
+    const list = document.getElementById('ingredients-list');
+    const row = document.createElement('div');
+    row.className = 'ingredient-row';
+    row.innerHTML = '<input type="text" placeholder="Qte" class="ing-qty"/><input type="text" placeholder="Unite" class="ing-unit"/><input type="text" placeholder="Ingredient" class="ing-name" required/><button type="button" class="btn-icon" onclick="this.parentElement.remove()">&#10005;</button>';
+    list.appendChild(row);
+    row.querySelector('.ing-name').focus();
+  }
+
+  saveRecipe() {
+    const name = document.getElementById('r-name').value.trim();
+    if (!name) return;
+    const ingredients = [];
+    document.querySelectorAll('.ingredient-row').forEach(row => {
+      const n = row.querySelector('.ing-name').value.trim();
+      if (n) ingredients.push({ name: n, quantity: row.querySelector('.ing-qty').value.trim(), unit: row.querySelector('.ing-unit').value.trim() });
+    });
+    const recipe = {
+      id: DataStore.id(), name,
+      source: document.getElementById('r-source').value.trim(),
+      tags: document.getElementById('r-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+      servings: document.getElementById('r-servings').value || null,
+      prepTime: document.getElementById('r-preptime').value || null,
+      ingredients,
+      steps: document.getElementById('r-steps').value.trim(),
+      addedAt: new Date().toISOString()
+    };
+    const recipes = DataStore.load('recipes');
+    recipes.push(recipe);
+    DataStore.save('recipes', recipes);
+    this.closeModal('modal-add-recipe');
+    this.renderRecipes();
+    this.toast('Recette ajoutee');
+  }
+
+  deleteRecipe(id) {
+    if (!confirm('Supprimer cette recette ?')) return;
+    DataStore.save('recipes', DataStore.load('recipes').filter(r => r.id !== id));
+    this.renderRecipes();
+  }
+
+  addRecipeToShopping(id) {
+    const recipe = DataStore.load('recipes').find(r => r.id === id);
+    if (!recipe?.ingredients?.length) { this.toast('Pas d\'ingredients'); return; }
+    const shopping = DataStore.load('shopping');
+    const fridgeNames = DataStore.load('fridge').map(i => i.name.toLowerCase());
+    let added = 0;
+    recipe.ingredients.forEach(ing => {
+      const exists = shopping.some(s => s.name.toLowerCase() === ing.name.toLowerCase() && !s.checked);
+      const inFridge = fridgeNames.includes(ing.name.toLowerCase());
+      if (!exists && !inFridge) {
+        shopping.push({ id: DataStore.id(), name: ing.name, quantity: ing.quantity, unit: ing.unit, fromRecipe: recipe.name, checked: false, addedAt: new Date().toISOString() });
+        added++;
+      }
+    });
+    DataStore.save('shopping', shopping);
+    this.toast(added + ' ingredient' + (added !== 1 ? 's' : '') + ' ajoute' + (added !== 1 ? 's' : ''));
+    if (this.currentTab === 'shopping') this.renderShopping();
+  }
+
+  // ── FRIDGE ──
+  expiryStatus(item) {
+    if (!item.expiresAt) return { cls: 'status-ok', label: 'OK' };
+    const d = Math.ceil((new Date(item.expiresAt) - new Date()) / 864e5);
+    if (d < 0) return { cls: 'status-expired', label: 'Expire depuis ' + Math.abs(d) + 'j' };
+    if (d === 0) return { cls: 'status-urgent', label: 'Aujourd\'hui' };
+    if (d === 1) return { cls: 'status-urgent', label: 'Demain' };
+    if (d <= 3) return { cls: 'status-warning', label: d + 'j restants' };
+    return { cls: 'status-ok', label: d + 'j' };
+  }
+
+  renderFridge() {
+    const items = DataStore.load('fridge');
+    const el = document.getElementById('fridge-list');
+    document.getElementById('fridge-count').textContent = items.length + ' article' + (items.length !== 1 ? 's' : '');
+
+    if (!items.length) {
+      el.innerHTML = '<div class="empty-state"><div class="empty-icon">&#129482;</div><h3>Frigo vide</h3><p>Ajoute ce que tu as achete pour suivre ton inventaire.</p></div>';
+      return;
+    }
+
+    const grouped = {};
+    items.forEach(i => { const c = i.category || 'autre'; (grouped[c] = grouped[c] || []).push(i); });
+
+    el.innerHTML = Object.entries(grouped).map(([catId, catItems]) => {
+      const cat = CATS.find(c => c.id === catId) || { label: catId };
+      return '<div class="fridge-category"><h3 class="category-title">' + cat.label + '</h3><div>' +
+        catItems.map(item => {
+          const s = this.expiryStatus(item);
+          return `<div class="fridge-item ${s.cls}">
+            <div class="item-info"><span class="item-name">${this.esc(item.name)}</span>${item.quantity ? '<span class="item-qty">' + this.esc(item.quantity) + ' ' + this.esc(item.unit || '') + '</span>' : ''}</div>
+            <div class="item-expiry"><span class="expiry-badge ${s.cls}">${s.label}</span>${item.expiresAt ? '<span class="expiry-date">' + new Date(item.expiresAt).toLocaleDateString('fr-FR') + '</span>' : ''}</div>
+            <div class="item-actions"><button class="btn-icon" onclick="app.useFridgeItem('${item.id}')" title="Utilise">&#10003;</button><button class="btn-icon" onclick="app.deleteFridgeItem('${item.id}')" title="Supprimer">&#10005;</button></div>
+          </div>`;
+        }).join('') + '</div></div>';
+    }).join('');
+  }
+
+  showAddFridgeModal() {
+    document.getElementById('modal-add-fridge').classList.add('open');
+    document.getElementById('fridge-form').reset();
+    document.getElementById('f-category').innerHTML = CATS.map(c => '<option value="' + c.id + '">' + c.label + '</option>').join('');
+    this.updateExpiry();
+  }
+
+  updateExpiry() {
+    const cat = CATS.find(c => c.id === document.getElementById('f-category').value);
+    if (cat) {
+      const d = new Date(); d.setDate(d.getDate() + cat.defaultDays);
+      document.getElementById('f-expires').value = d.toISOString().split('T')[0];
+    }
+  }
+
+  saveFridgeItem() {
+    const name = document.getElementById('f-name').value.trim();
+    if (!name) return;
+    const fridge = DataStore.load('fridge');
+    fridge.push({
+      id: DataStore.id(), name,
+      category: document.getElementById('f-category').value,
+      quantity: document.getElementById('f-quantity').value.trim(),
+      unit: document.getElementById('f-unit').value.trim(),
+      purchasedAt: document.getElementById('f-purchased').value || new Date().toISOString().split('T')[0],
+      expiresAt: document.getElementById('f-expires').value || null,
+      addedAt: new Date().toISOString()
+    });
+    DataStore.save('fridge', fridge);
+    this.closeModal('modal-add-fridge');
+    this.renderFridge();
+    this.checkExpirations();
+    this.toast('Ajoute au frigo');
+  }
+
+  useFridgeItem(id) {
+    DataStore.save('fridge', DataStore.load('fridge').filter(i => i.id !== id));
+    this.renderFridge();
+    this.checkExpirations();
+  }
+
+  deleteFridgeItem(id) {
+    DataStore.save('fridge', DataStore.load('fridge').filter(i => i.id !== id));
+    this.renderFridge();
+    this.checkExpirations();
+  }
+
+  checkExpirations() {
+    const expiring = DataStore.load('fridge').filter(item => {
+      if (!item.expiresAt) return false;
+      const d = Math.ceil((new Date(item.expiresAt) - new Date()) / 864e5);
+      return d >= 0 && d <= 2;
+    });
+    const el = document.getElementById('expiry-alerts');
+    if (!expiring.length) { el.innerHTML = ''; return; }
+    el.innerHTML = '<div class="alert alert-warning"><strong>' + expiring.length + ' article' + (expiring.length > 1 ? 's' : '') + ' expire' + (expiring.length > 1 ? 'nt' : '') + ' bientot</strong><ul>' +
+      expiring.map(i => '<li><strong>' + this.esc(i.name) + '</strong> — ' + this.expiryStatus(i).label + '</li>').join('') + '</ul></div>';
+  }
+
+  // ── SHOPPING ──
+  renderShopping() {
+    const items = DataStore.load('shopping');
+    const el = document.getElementById('shopping-list');
+    const unchecked = items.filter(i => !i.checked).length;
+    document.getElementById('shopping-count').textContent = unchecked + ' restant' + (unchecked !== 1 ? 's' : '');
+
+    if (!items.length) {
+      el.innerHTML = '<div class="empty-state"><div class="empty-icon">&#128722;</div><h3>Liste vide</h3><p>Ajoute des ingredients depuis une recette ou manuellement.</p></div>';
+      return;
+    }
+
+    const sorted = [...items].sort((a, b) => (a.checked ? 1 : 0) - (b.checked ? 1 : 0));
+    el.innerHTML = sorted.map(item => `
+      <div class="shopping-item ${item.checked ? 'checked' : ''}">
+        <label class="checkbox-label">
+          <input type="checkbox" ${item.checked ? 'checked' : ''} onchange="app.toggleShop('${item.id}')" />
+          <span class="item-text">${item.quantity ? '<strong>' + this.esc(item.quantity) + ' ' + this.esc(item.unit || '') + '</strong> ' : ''}${this.esc(item.name)}</span>
+          ${item.fromRecipe ? '<span class="from-recipe">' + this.esc(item.fromRecipe) + '</span>' : ''}
+        </label>
+        <button class="btn-icon" onclick="app.deleteShopItem('${item.id}')">&#10005;</button>
+      </div>`).join('');
+  }
+
+  addShoppingItem() {
+    const input = document.getElementById('shopping-input');
+    const name = input.value.trim();
+    if (!name) return;
+    const shopping = DataStore.load('shopping');
+    shopping.push({ id: DataStore.id(), name, quantity: '', unit: '', fromRecipe: null, checked: false, addedAt: new Date().toISOString() });
+    DataStore.save('shopping', shopping);
+    input.value = '';
+    this.renderShopping();
+  }
+
+  toggleShop(id) {
+    const shopping = DataStore.load('shopping');
+    const item = shopping.find(i => i.id === id);
+    if (item) item.checked = !item.checked;
+    DataStore.save('shopping', shopping);
+    this.renderShopping();
+  }
+
+  deleteShopItem(id) {
+    DataStore.save('shopping', DataStore.load('shopping').filter(i => i.id !== id));
+    this.renderShopping();
+  }
+
+  clearCheckedShopping() {
+    DataStore.save('shopping', DataStore.load('shopping').filter(i => !i.checked));
+    this.renderShopping();
+    this.toast('Articles coches supprimes');
+  }
+
+  moveCheckedToFridge() {
+    const shopping = DataStore.load('shopping');
+    const checked = shopping.filter(i => i.checked);
+    if (!checked.length) return;
+    const fridge = DataStore.load('fridge');
+    checked.forEach(item => {
+      fridge.push({ id: DataStore.id(), name: item.name, category: 'autre', quantity: item.quantity, unit: item.unit, purchasedAt: new Date().toISOString().split('T')[0], expiresAt: null, addedAt: new Date().toISOString() });
+    });
+    DataStore.save('shopping', shopping.filter(i => !i.checked));
+    DataStore.save('fridge', fridge);
+    this.renderShopping();
+    this.renderFridge();
+    this.toast(checked.length + ' article' + (checked.length > 1 ? 's' : '') + ' au frigo');
+  }
+
+  // ── SUGGESTIONS ──
+  renderSuggestions() {
+    const el = document.getElementById('suggestions-content');
+    const fridge = DataStore.load('fridge');
+    const recipes = DataStore.load('recipes');
+    const season = SEASONS.get();
+
+    let html = '<div class="season-banner"><span class="season-label">' + SEASONS.label() + '</span><p>Ingredients de saison : ' + SEASONS.ingredients().join(', ') + '</p></div>';
+
+    const expiring = fridge.filter(i => { if (!i.expiresAt) return false; const d = Math.ceil((new Date(i.expiresAt) - new Date()) / 864e5); return d >= 0 && d <= 3; });
+
+    if (expiring.length) {
+      html += '<div class="suggestion-section"><h3>A cuisiner en priorite</h3><p>Ces ingredients expirent bientot :</p><div class="chip-row">' +
+        expiring.map(i => '<span class="chip-expiry">' + this.esc(i.name) + ' — ' + this.expiryStatus(i).label + '</span>').join('') + '</div>';
+
+      const matching = recipes.filter(r => r.ingredients?.some(ing => expiring.some(e => e.name.toLowerCase().includes(ing.name.toLowerCase()) || ing.name.toLowerCase().includes(e.name.toLowerCase()))));
+      if (matching.length) {
+        html += '<div>' + matching.map(r => '<div class="suggestion-card"><strong>' + this.esc(r.name) + '</strong><span class="match-info">Utilise : ' +
+          r.ingredients.filter(ing => expiring.some(e => e.name.toLowerCase().includes(ing.name.toLowerCase()))).map(i => i.name).join(', ') + '</span></div>').join('') + '</div>';
+      }
+      html += '</div>';
+    }
+
+    if (fridge.length && recipes.length) {
+      const fridgeNames = fridge.map(i => i.name.toLowerCase());
+      const canMake = recipes.map(r => {
+        if (!r.ingredients?.length) return null;
+        const matched = r.ingredients.filter(ing => fridgeNames.some(f => f.includes(ing.name.toLowerCase()) || ing.name.toLowerCase().includes(f)));
+        const ratio = matched.length / r.ingredients.length;
+        return { recipe: r, matched: matched.length, total: r.ingredients.length, ratio };
+      }).filter(r => r && r.ratio >= 0.5).sort((a, b) => b.ratio - a.ratio);
+
+      if (canMake.length) {
+        html += '<div class="suggestion-section"><h3>Recettes faisables maintenant</h3><div>' +
+          canMake.map(m => '<div class="suggestion-card"><strong>' + this.esc(m.recipe.name) + '</strong><span class="match-info">' + m.matched + '/' + m.total + ' ingredients (' + Math.round(m.ratio * 100) + '%)</span></div>').join('') + '</div></div>';
+      }
+    }
+
+    html += '<div class="suggestion-section"><h3>Idees de saison</h3><div class="chip-row">' +
+      SEASONS.ideas().map(i => '<span class="chip-season">' + i + '</span>').join('') + '</div></div>';
+
+    if (!fridge.length && !recipes.length) {
+      html += '<div class="empty-state"><div class="empty-icon">&#128161;</div><h3>Ajoute des recettes et remplis ton frigo</h3><p>Les suggestions apparaitront quand tu auras des donnees.</p></div>';
+    }
+
+    el.innerHTML = html;
+  }
+
+  // ── GLOBAL ──
+  bindGlobal() {
+    window.app = this;
+    document.getElementById('btn-export')?.addEventListener('click', () => this.exportData());
+    document.getElementById('btn-import')?.addEventListener('click', () => document.getElementById('import-file').click());
+    document.getElementById('import-file')?.addEventListener('change', (e) => this.importData(e));
+    document.getElementById('recipe-search')?.addEventListener('input', () => this.renderRecipes());
+    document.getElementById('shopping-input')?.addEventListener('keydown', (e) => { if (e.key === 'Enter') this.addShoppingItem(); });
+    document.getElementById('f-category')?.addEventListener('change', () => this.updateExpiry());
+  }
+
+  exportData() {
+    const blob = new Blob([JSON.stringify(DataStore.exportAll(), null, 2)], { type: 'application/json' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'frigo-backup-' + new Date().toISOString().split('T')[0] + '.json';
+    a.click(); URL.revokeObjectURL(a.href);
+    this.toast('Donnees exportees');
+  }
+
+  importData(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        DataStore.importAll(JSON.parse(e.target.result));
+        this.renderAll(); this.checkExpirations();
+        this.toast('Donnees importees');
+      } catch { this.toast('Fichier invalide'); }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => { const a = new FridgeApp(); a.init(); });
+</script>
